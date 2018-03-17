@@ -1,0 +1,105 @@
+<mat-card class="list">
+  <div class="card">
+    <div>
+    <mat-card class="sql-input">
+      <mat-card-title>SQL</mat-card-title>
+      <mat-card-content>
+        select name, location <br>
+        from customer; <br>
+      </mat-card-content>
+    </mat-card>
+    <button mat-raised-button type="submit" color="primary" (click)="execute1()">EXECUTE</button>
+    </div>
+      <div>
+      <mat-card class="return">
+        <mat-card-title>Result From Distributed Database</mat-card-title>
+        <mat-card-content>
+          <p  *ngFor="let res of disRes1; let i = index">
+          {{res.name}}   --   {{res.location}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="return">
+        <mat-card-title>Result From Local Database</mat-card-title>
+        <mat-card-content>
+          <p  *ngFor="let res of localRes1; let i = index">
+            {{res.name}}   --   {{res.location}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart" echarts [options]="options1"></div>
+  </div>
+</mat-card>
+
+<mat-card class="list">
+  <div class="card">
+    <div>
+      <mat-card class="sql-input">
+        <mat-card-title>SQL</mat-card-title>
+        <mat-card-content>
+          select category, count(category) <br>
+          from items <br>
+          group by category;
+        </mat-card-content>
+      </mat-card>
+      <button mat-raised-button type="submit" color="primary" (click)="execute2()">EXECUTE</button>
+    </div>
+    <div>
+      <mat-card class="return">
+        <mat-card-title>Result From Distributed Database</mat-card-title>
+        <mat-card-content>
+          <p  *ngFor="let res of disRes2; let i = index">
+            {{res.category}} -- {{res._c1}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="return">
+        <mat-card-title>Result From Local Database</mat-card-title>
+        <mat-card-content>
+          <mat-card-content>
+            <p *ngFor="let res of localRes2; let i = index">
+              {{res.category}} -- {{res.count}}
+            </p>
+          </mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart" echarts [options]="options2"></div>
+  </div>
+</mat-card>
+
+<mat-card class="list">
+  <div class="card">
+    <div>
+      <mat-card class="sql-input">
+        <mat-card-title>SQL</mat-card-title>
+        <mat-card-content>
+          select items.name, relation.create_data <br>
+          from items join relation <br>
+          on relation.item_id = items.id;
+        </mat-card-content>
+      </mat-card>
+      <button mat-raised-button type="submit" color="primary" (click)="execute3()">EXECUTE</button>
+    </div>
+    <div>
+      <mat-card class="return">
+        <mat-card-title>Result From Distributed Database</mat-card-title>
+        <mat-card-content>
+          <p  *ngFor="let res of disRes3; let i = index">
+            {{res.name}} -- {{res.create_data}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="return">
+        <mat-card-title>Result From Local Database</mat-card-title>
+        <mat-card-content>
+          <p *ngFor="let res of localRes3; let i = index">
+            {{res.name}} -- {{res.create_data}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart" echarts [options]="options3"></div>
+  </div>
+</mat-card>
